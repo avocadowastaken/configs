@@ -12,28 +12,37 @@
   },
   "license": "MIT",
   "author": "Umidbek Karimov",
+  "type": "module",
+  "exports": {
+    "./tsconfig.json": "./tsconfig.json"
+  },
   "files": [
     "tsconfig.json"
   ],
   "scripts": {
-    "lint": "prettier -wc .",
+    "checks": "npx prettier --list-different . && npx tsc && npx uvu",
     "prepare": "husky install",
-    "prerelease": "npm i && npm run lint",
-    "release": "np --no-2fa --no-tests"
+    "release": "npx --yes np --test-script checks"
   },
   "lint-staged": {
-    "*": "prettier -wu"
+    "*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
-    "husky": "7.0.4",
-    "lint-staged": "12.4.0",
-    "np": "7.6.0",
-    "prettier": "2.5.1",
-    "prettier-plugin-packagejson": "2.2.15"
+    "@types/node": "18.15.11",
+    "husky": "8.0.3",
+    "lint-staged": "13.2.0",
+    "prettier": "2.8.7",
+    "prettier-plugin-packagejson": "2.4.3",
+    "typescript": "5.0.2",
+    "uvu": "^0.5.6"
   },
   "engines": {
-    "node": ">=12",
-    "npm": ">=7"
+    "node": ">=14",
+    "npm": ">=8"
+  },
+  "volta": {
+    "node": "14.21.3",
+    "npm": "8.19.4"
   },
   "publishConfig": {
     "access": "public"
